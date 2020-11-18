@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace MyTimer
 {
-    public delegate void MiTimer();
+    public delegate void deleg();
     class MyTimer
     {
         static readonly private object l = new object();
@@ -13,9 +13,9 @@ namespace MyTimer
         public int interval;
         private bool running = false;
         private bool fin = false;
-        MiTimer f;
+        deleg f;
 
-        public MyTimer(MiTimer Func, int interv)
+        public MyTimer(deleg Func, int interv)
         {
             this.f = Func;
             interval = interv;
@@ -70,7 +70,7 @@ namespace MyTimer
 
         public bool repeat(ConsoleKey k)
         {
-            if (k == ConsoleKey.D1)
+            if (k == ConsoleKey.D1 || k == ConsoleKey.NumPad1)
             {
                 fin = false;
                 return true;
