@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace MyTimer
 {
-    public delegate void deleg();
+    public delegate void Deleg();
     class MyTimer
     {
         static readonly private object l = new object();
@@ -13,9 +13,9 @@ namespace MyTimer
         public int interval;
         private bool running = false;
         private bool fin = false;
-        deleg f;
+        Deleg f;
 
-        public MyTimer(deleg Func, int interv)
+        public MyTimer(Deleg Func, int interv)
         {
             this.f = Func;
             interval = interv;
@@ -49,11 +49,8 @@ namespace MyTimer
         {
             lock (l)
             {
-                if (!fin)
-                {
-                    running = true;
-                    Monitor.Pulse(l);
-                }
+                running = true;
+                Monitor.Pulse(l);
             }
         }
 
@@ -61,10 +58,7 @@ namespace MyTimer
         {
             lock (l)
             {
-                if (!fin)
-                {
-                    running = false;
-                }
+                running = false;
             }
         }
 
