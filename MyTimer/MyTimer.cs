@@ -56,10 +56,7 @@ namespace MyTimer
 
         public void pause()
         {
-            lock (l)
-            {
-                running = false;
-            }
+            running = false;
         }
 
         public bool repeat(ConsoleKey k)
