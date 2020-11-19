@@ -59,9 +59,9 @@ namespace MyTimer
             running = false;
         }
 
-        public bool repeat(ConsoleKey k)
+        public bool repeat(ConsoleKey k, ConsoleKey keyRestart)
         {
-            if (k == ConsoleKey.D1 || k == ConsoleKey.NumPad1)
+            if (k == keyRestart)
             {
                 fin = false;
                 return true;

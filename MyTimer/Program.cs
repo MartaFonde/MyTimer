@@ -13,6 +13,7 @@ namespace MyTimer
         static void Main(string[] args)
         {
             MyTimer t = new MyTimer(increment, 1000);
+            ConsoleKey keyRestart = ConsoleKey.D1;
             //t.interval = 1000;
             //string op = "";
             do
@@ -25,7 +26,7 @@ namespace MyTimer
                 t.pause();
                 Console.WriteLine("\nPress 1 to restart or another key to end.");
                 //op = Console.ReadLine();
-            } while (t.repeat(Console.ReadKey().Key));
+            } while (t.repeat(Console.ReadKey().Key, keyRestart));
         }
     }
 }
