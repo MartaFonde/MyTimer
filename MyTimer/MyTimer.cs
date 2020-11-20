@@ -15,11 +15,11 @@ namespace MyTimer
         private bool fin = false;
         Deleg f;
 
-        public MyTimer(Deleg Func, int interv)
+        public MyTimer(Deleg Func)
         {
             this.f = Func;
-            interval = interv;
             Thread t = new Thread(loop);
+            t.IsBackground = true;      //NECESARIO para que acabe o fío cando acabe o main!!!
             t.Start();
         }
 
@@ -29,18 +29,12 @@ namespace MyTimer
             {
                 lock (l)
                 {
-                    if (!fin)
+                    if (!running)
                     {
-                        if (running)
-                        {
-                            f();
-                            Thread.Sleep(interval);
-                        }
-                        else
-                        {
-                            Monitor.Wait(l);
-                        }
+                        Monitor.Wait(l);                            
                     }
+                    f();
+                    Thread.Sleep(interval);
                 }
             }
         }
@@ -56,26 +50,10 @@ namespace MyTimer
 
         public void pause()
         {
-            running = false;
-        }
-
-        public bool repeat(ConsoleKey k, ConsoleKey keyRestart)
-        {
-            if (k == keyRestart)
+            lock (l)
             {
-                fin = false;
-                return true;
-            }
-            else
-            {
-                fin = true;
                 running = false;
-                lock (l)
-                {
-                    Monitor.Pulse(l);
-                }
-                return false;
             }
-        }
+        }        
     }
 }

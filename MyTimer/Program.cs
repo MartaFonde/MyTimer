@@ -12,21 +12,20 @@ namespace MyTimer
         }
         static void Main(string[] args)
         {
-            MyTimer t = new MyTimer(increment, 1000);
-            ConsoleKey keyRestart = ConsoleKey.D1;
-            //t.interval = 1000;
-            //string op = "";
+            MyTimer t = new MyTimer(increment);
+            t.interval = 1000;
+            string op = "";
             do
             {
-                Console.WriteLine("\nPress any key to start.");
+                Console.WriteLine("Press any key to start.");
                 Console.ReadKey();
                 t.run();
-                Console.WriteLine("\nPress any key to pause.");
+                Console.WriteLine("Press any key to pause.");
                 Console.ReadKey();
                 t.pause();
-                Console.WriteLine("\nPress 1 to restart or another key to end.");
-                //op = Console.ReadLine();
-            } while (t.repeat(Console.ReadKey().Key, keyRestart));
+                Console.WriteLine("Press 1 to restart or another key to end.");
+                op = Console.ReadLine();
+            } while (op == "1");
         }
     }
 }
